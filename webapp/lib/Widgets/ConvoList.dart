@@ -26,9 +26,9 @@ class _ConvoListState extends State<ConvoList> {
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade50,
       bottomNavigationBar: ChatBox(
-                roomId: widget.room.id,
-                user: widget.user,
-              ),
+        roomId: widget.room.id,
+        user: widget.user,
+      ),
       body: StreamBuilder(
         stream: MessageApi.retreiveMessages(roomID: widget.room.id),
         builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
@@ -56,14 +56,20 @@ class _ConvoListState extends State<ConvoList> {
                 Function scroll = () {
                   Timer(
                       Duration(milliseconds: 300),
-                      () => _scrollController
-                          .animateTo(_scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 300), curve: Curves.easeIn));
+                      () => _scrollController.animateTo(
+                          _scrollController.position.maxScrollExtent,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeIn));
                 };
                 return Align(
-                  alignment: widget.user.id == msg.senderID ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment: widget.user.id == msg.senderID
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: MessageWidget(
                     message: msg,
-                    isLastMessage: index == messages.length - 1, // checking if last message posted in order to scroll listview to latest
+                    isLastMessage: index ==
+                        messages.length -
+                            1, // checking if last message posted in order to scroll listview to latest
                     scroll: scroll,
                   ),
                 );
@@ -83,9 +89,9 @@ class _ConvoListState extends State<ConvoList> {
   }
 
   @override
-    void dispose() {
-      // TODO: implement dispose
-      super.dispose();
-      _scrollController.dispose();
-    }
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scrollController.dispose();
+  }
 }
