@@ -6,7 +6,9 @@ class Api {
       'https://df0ksgnmih.execute-api.ca-central-1.amazonaws.com/';
 
   static Future<List<Comment>> retreiveComments() async {
-    var response = await http.get(Uri.parse(endPoint));
+    var response = await http.get(Uri.parse(endPoint)).catchError((e) {
+      return null;
+    });
     List<Comment> comments = commentFromJson(response.body);
     // sort comments by date
     comments.sort((a, b) => (date(a.date)).compareTo(date(b.date)));
