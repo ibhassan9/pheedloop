@@ -40,9 +40,7 @@ class _MainPageState extends State<MainPage> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               SizedBox(height: 10.0),
-              Expanded(
-                child: ConvoList(room: selectedRoom, user: widget.user,),
-              ),
+              Expanded(child: ConvoList(room: selectedRoom, user: widget.user,)),
             ],
           ),
         ),
@@ -67,10 +65,11 @@ class _MainPageState extends State<MainPage> {
           children: [
             Text('Chat Rooms',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-            Flexible(
-                child: ListView(
-              children: renderDummyRooms(),
-            ))
+            Expanded(
+              child: ListView(
+                children: renderDummyRooms(),
+              ),
+            )
           ],
         ),
       ),
