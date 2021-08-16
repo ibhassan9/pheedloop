@@ -71,12 +71,6 @@ class Api {
       }
     }
 
-    // check if this is a subcomment
-    if (parentId != null) {
-      // sort by date
-      result.sort((a, b) => (date(a.date)).compareTo(date(b.date)));
-    }
-
     return result;
   }
 }
