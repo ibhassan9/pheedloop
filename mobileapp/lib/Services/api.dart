@@ -9,7 +9,7 @@ class Api {
     var response = await http.get(Uri.parse(endPoint));
     List<Comment> comments = commentFromJson(response.body);
     // sort comments by date
-    comments.sort((a, b) => a.date.compareTo(b.date));
+    comments.sort((a, b) => (date(a.date)).compareTo(date(b.date)));
     // Generate a tree structure
     var treeComments = await buildStructure(comments);
     // Remove the replies
@@ -17,6 +17,12 @@ class Api {
     // Change tree to list
     var commentArray = getListFromTree(treeComments, comments);
     return commentArray;
+  }
+
+  // convert to accepted format & return parsed date
+  static DateTime date(String d) {
+    d = d.replaceAll('/', '');
+    return DateTime.parse(d);
   }
 
   static List<Comment> getListFromTree(
@@ -66,7 +72,7 @@ class Api {
     // check if this is a subcomment
     if (parentId != null) {
       // sort by date
-      result.sort((a, b) => a.date.compareTo(b.date));
+      result.sort((a, b) => (date(a.date)).compareTo(date(b.date)));
     }
 
     return result;
